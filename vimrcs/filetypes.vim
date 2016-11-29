@@ -22,12 +22,16 @@ au FileType python map <buffer> <leader>D ?def
 """"""""""""""""""""""""""""""
 " => JavaScript section
 """""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
+" au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
-au FileType javascript setl nocindent
+" au FileType javascript setl nocindent
+au FileType javascript set sw=4 
+au FileType javascript set ts=4 
+au FileType javascript set sts=4 
 
 au FileType javascript imap <c-t> $log();<esc>hi
 au FileType javascript imap <c-a> alert();<esc>hi
+
 
 au FileType javascript inoremap <buffer> $r return 
 au FileType javascript inoremap <buffer> $f //--- PH ----------------------------------------------<esc>FP2xi

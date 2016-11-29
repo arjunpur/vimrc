@@ -32,13 +32,10 @@ set guioptions-=l
 set guioptions-=L
 
 " Colorscheme
-if has("gui_running")
-    set background=dark
-    colorscheme peaksea
-else
-    colorscheme desert
-    let g:colors_name="desert"
-endif
+set background=dark
+colorscheme solarized
+
+highlight LineNr ctermfg=grey ctermbg=white
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
