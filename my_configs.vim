@@ -75,8 +75,6 @@ set tags=tags;/
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
-nmap <leader>p :CtrlP<cr>
-
 syntax on
 
 "All for neocomplete
