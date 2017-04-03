@@ -39,16 +39,16 @@ nnoremap <silent> <C-w><Down> :<C-u>call <SID>JumpWithWrap('j', 'k')<CR>
 nnoremap <silent> <C-w><Up> :<C-u>call <SID>JumpWithWrap('k', 'j')<CR>
 nnoremap <silent> <C-w><Right> :<C-u>call <SID>JumpWithWrap('l', 'h')<CR>
 
-nnoremap <buffer> <silent> <LocalLeader>t :EnType<CR> 
-xnoremap <buffer> <silent> <LocalLeader>t :EnType selection<CR> 
-nnoremap <buffer> <silent> <LocalLeader>T :EnTypeCheck<CR>
+nnoremap <silent> <LocalLeader>t :EnType<CR> 
+xnoremap <silent> <LocalLeader>t :EnType selection<CR> 
+nnoremap <silent> <LocalLeader>T :EnTypeCheck<CR>
 
-nnoremap <buffer> <silent> K  :EnDocBrowse<CR>
-nnoremap <buffer> <silent> gd :EnDeclaration<CR>
+nnoremap <silent> K  :EnDocBrowse<CR>
+nnoremap <silent> gd :EnDeclaration<CR>
 
-nnoremap <buffer> <silent> <LocalLeader>i :EnInspectType<CR>
-nnoremap <buffer> <silent> <LocalLeader>I :EnSuggestImport<CR>
-nnoremap <buffer> <silent> <LocalLeader>r :EnRename<CR>
+nnoremap <silent> <LocalLeader>i :EnInspectType<CR>
+nnoremap <silent> <LocalLeader>I :EnSuggestImport<CR>
+nnoremap <silent> <LocalLeader>r :EnRename<CR>
 
 
 filetype off
