@@ -168,3 +168,31 @@ nnoremap <silent> <leader>c :call SyntasticCheckCoffeescript()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => neocompletecache and TagbarToggle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-g> <C-]>
+vnoremap <C-g> <C-]>
+" map <C-h> :tn<CR>
+" map <C-f> :tp<CR>
+"" map <C-o> :CtrlPTag<CR>
+map <C-i> :TagbarToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" The Silver Searcher
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+nnoremap <Leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>

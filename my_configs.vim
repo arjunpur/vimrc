@@ -1,5 +1,5 @@
 set relativenumber
-set clipboard=unnamedplus
+set clipboard=unnamed
 set splitright
 set splitbelow
 set nocompatible
@@ -39,17 +39,29 @@ nnoremap <silent> <C-w><Down> :<C-u>call <SID>JumpWithWrap('j', 'k')<CR>
 nnoremap <silent> <C-w><Up> :<C-u>call <SID>JumpWithWrap('k', 'j')<CR>
 nnoremap <silent> <C-w><Right> :<C-u>call <SID>JumpWithWrap('l', 'h')<CR>
 
-nnoremap <silent> <LocalLeader>t :EnType<CR> 
-xnoremap <silent> <LocalLeader>t :EnType selection<CR> 
-nnoremap <silent> <LocalLeader>T :EnTypeCheck<CR>
+nnoremap <silent> <Leader>t :EnType<CR> 
+xnoremap <silent> <Leader>t :EnType selection<CR> 
+nnoremap <silent> <Leader>T :EnTypeCheck<CR>
 
 nnoremap <silent> K  :EnDocBrowse<CR>
 nnoremap <silent> gd :EnDeclaration<CR>
 
-nnoremap <silent> <LocalLeader>i :EnInspectType<CR>
-nnoremap <silent> <LocalLeader>I :EnSuggestImport<CR>
-nnoremap <silent> <LocalLeader>r :EnRename<CR>
+nnoremap <silent> <Leader>i :EnInspectType<CR>
+nnoremap <silent> <Leader>I :EnSuggestImport<CR>
+nnoremap <silent> <Leader>r :EnRename<CR>
 
+inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>
+
+
+" http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
+:autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
+set mouse=a
 
 filetype off
 set rtp+=~/.vim_runtime/sources_non_forked/Vundle.vim
@@ -61,12 +73,14 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'https://github.com/Shougo/neocomplete.vim'
-Plugin 'https://github.com/ensime/ensime-vim'
-
-" Search recursively up for the tags directory
-set tags=tags;/
+Plugin 'ensime/ensime-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'https://github.com/ervandew/supertab'
 
 call vundle#end()
+" Search recursively up for the tags directory
+set tags=./tags;,tags;
+
 filetype plugin indent on
 
 let g:livepreview_previewer = 'open -a Preview'

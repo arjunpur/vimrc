@@ -152,15 +152,10 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-try
-    colorscheme solarized
-catch
-endtry
-
 set background=dark
 
+highlight Normal ctermfg=grey ctermbg=darkblue
 " Add a bit extra margin to the left
-highlight LineNr ctermfg=grey ctermbg=white
 set foldcolumn=1
 
 " Set extra options when running in GUI mode
