@@ -137,8 +137,8 @@ map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
-highlight Normal ctermfg=grey ctermbg=darkblue
-colorscheme peaksea
+highlight Normal ctermfg=white ctermbg=darkblue
+colorscheme peaksea 
 set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
