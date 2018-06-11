@@ -47,7 +47,8 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>
 set mouse=a
 
 filetype off
-set rtp+=~/.vim_runtime/sources_non_forked/Vundle.vim
+set rtp+=/Users/apuri/.vim_runtime/sources_non_forked/Vundle.vim
+set rtp+=/Users/apuri/.vim_runtime/sources_non_forked/
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
@@ -57,6 +58,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'https://github.com/ervandew/supertab'
 Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 
 call vundle#end()
 " Search recursively up for the tags directory
@@ -70,7 +73,7 @@ let g:ctrlp_working_path_mode = 'ra'
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal omnifunc=python3complete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
