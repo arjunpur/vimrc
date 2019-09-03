@@ -9,6 +9,10 @@ nmap <leader>m :noh<cr>
 
 let g:NERDTreeWinPos = "left"
 
+" Delete actually blackholes the removal
+nnoremap d "_d
+vnoremap d "_d
+
 "
 " Wrap window-move-cursor
 "
@@ -46,28 +50,50 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>
 
 set mouse=a
 
-filetype off
-set rtp+=/Users/apuri/.vim_runtime/sources_non_forked/Vundle.vim
-set rtp+=/Users/apuri/.vim_runtime/sources_non_forked/
-call vundle#begin()
+call plug#begin('~/.vim/bundle')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'othree/yajs.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'https://github.com/ervandew/supertab'
-Plugin 'mxw/vim-jsx'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
+" Plug 'ervandew/supertab'
+Plug 'tpope/vim-sleuth'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb' " For fugitive
+Plug 'fatih/vim-go'
+Plug 'davidhalter/jedi-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'yegappan/mru'
+Plug 'scrooloose/nerdtree'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'jason0x43/vim-js-indent'
+Plug 'tpope/vim-commentary'
+Plug 'mileszs/ack.vim'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'tpope/vim-surround'
+Plug 'itchyny/lightline.vim'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'flazz/vim-colorschemes'
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
 
-call vundle#end()
-" Search recursively up for the tags directory
-set tags=./tags;,tags;
+call plug#end()
 
-filetype plugin indent on
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+
+let g:github_enterprise_urls = ['git@github.plaid.com']
+
+syntax enable
+"colorscheme gruvbox
+"colorscheme codedark
+colorscheme onedark
+let g:onedark_termcolors=256
+
+
+
+let vim_markdown_preview_browser='Google Chrome'
+
+" highlight Normal ctermfg=white ctermbg=darkblue
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -77,5 +103,27 @@ autocmd FileType python setlocal omnifunc=python3complete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
+" Omni complete- Ctrl-a for menu
+inoremap <C-a> <C-x><C-o>
+
+" use ctrl-j and ctrl-k to navigate omni complete menu
+inoremap <expr> <c-j> ("\<C-n>")
+inoremap <expr> <c-k> ("\<C-p>")
+
+" Set working directory to current buffer on entry
+autocmd BufEnter * lcd %:p:h
+
+" Trim all trailing whitespaces
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+command! TrimWhitespace call TrimWhitespace()
+noremap <Leader>q :call TrimWhitespace()<CR>
+
+
+:inoremap <F5> <C-R>=strftime("%c")<CR>
 
 
