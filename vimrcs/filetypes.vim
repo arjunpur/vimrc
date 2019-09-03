@@ -35,6 +35,8 @@ au FileType javascript setlocal sts=2
 au FileType javascript imap <c-t> $log();<esc>hi
 au FileType javascript imap <c-a> alert();<esc>hi
 
+autocmd FileType typescript set cino+=(0
+
 
 au FileType javascript inoremap <buffer> $r return 
 au FileType javascript inoremap <buffer> $f //--- PH<esc>FP2xi
@@ -52,6 +54,16 @@ endfunction
 
 
 """"""""""""""""""""""""""""""
+" => Typescript section
+"""""""""""""""""""""""""""""""
+
+au FileType typescript setlocal sw=2
+au FileType typescript setlocal ts=2
+au FileType typescript setlocal sts=2
+autocmd FileType typescript nmap <buffer> <Leader><Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
+
+""""""""""""""""""""""""""""""
 " => CoffeeScript section
 """""""""""""""""""""""""""""""
 function! CoffeeScriptFold()
@@ -66,16 +78,37 @@ au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 """"""""""""""""""""""""""""""
 " => Shell section
 """"""""""""""""""""""""""""""
-if exists('$TMUX') 
-    if has('nvim')
-        set termguicolors
-    else
-        set term=screen-256color 
-    endif
-endif
+au FileType sh setlocal sw=2
+au FileType sh setlocal ts=2
+au FileType sh setlocal sts=2
+
+" if exists('$TMUX') 
+"     if has('nvim')
+"         set termguicolors
+"     else
+"         set term=screen-256color 
+"     endif
+" endif
 
 
 """"""""""""""""""""""""""""""
 " => Twig section
 """"""""""""""""""""""""""""""
 autocmd BufRead *.twig set syntax=html filetype=html
+
+""""""""""""""""""""""""""""""
+" => YAML
+""""""""""""""""""""""""""""""
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+autocmd BufRead *.Jenkinsfile setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
+
+""""""""""""""""""""""""""""""
+" => Golang 
+""""""""""""""""""""""""""""""
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_def_mode = 'gopls'
+
+ 
