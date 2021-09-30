@@ -62,6 +62,11 @@ au FileType typescript setlocal ts=2
 au FileType typescript setlocal sts=2
 autocmd FileType typescript nmap <buffer> <Leader><Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
+""""""""""""""""""""""""""""""
+" => React section
+"""""""""""""""""""""""""""""""
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+
 
 """"""""""""""""""""""""""""""
 " => CoffeeScript section
@@ -110,5 +115,10 @@ autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_def_mode = 'gopls'
-
- 
+let g:go_info_mode='gopls'
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+let g:go_code_completion_enabled = 0
+let g:go_fmt_autosave = 1
+let g:go_doc_keywordprg_enabled = 0

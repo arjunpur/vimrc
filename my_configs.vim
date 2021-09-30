@@ -37,51 +37,56 @@ nnoremap <silent> <C-w><Down> :<C-u>call <SID>JumpWithWrap('j', 'k')<CR>
 nnoremap <silent> <C-w><Up> :<C-u>call <SID>JumpWithWrap('k', 'j')<CR>
 nnoremap <silent> <C-w><Right> :<C-u>call <SID>JumpWithWrap('l', 'h')<CR>
 
-inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>
 
-
 " http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
 :autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
+" https://vi.stackexchange.com/questions/444/how-do-i-reload-the-current-file#:~:text=You%20can%20actually%20invoke%20this%20prompt%20using%20the%20%3Achecktime%20command.&text=Automatically%20causes%20vim%20to%20reload,using%20another%20application%20and%20saved.
+au FocusGained,BufEnter * :checktime
 
 set mouse=a
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'ervandew/supertab'
 Plug 'tpope/vim-sleuth'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb' " For fugitive
-Plug 'fatih/vim-go'
-Plug 'davidhalter/jedi-vim'
+Plug 'airblade/vim-rooter'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Quramy/tsuquyomi'
 Plug 'yegappan/mru'
 Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'jason0x43/vim-js-indent'
 Plug 'tpope/vim-commentary'
 Plug 'mileszs/ack.vim'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'tpope/vim-surround'
-Plug 'itchyny/lightline.vim'
-" Plug 'vim-syntastic/syntastic'
-" Plug 'flazz/vim-colorschemes'
-Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'hashivim/vim-terraform'
+Plug 'ruanyl/vim-gh-line'
+Plug 'sebdah/vim-delve'
+Plug 'peitalin/vim-jsx-typescript' " syntax highlighting for tsx files
 
 call plug#end()
+
+let g:gh_line_map = 'gl'
+let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+let g:github_enterprise_urls = ['git@github.plaid.com']
 
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
-let g:github_enterprise_urls = ['git@github.plaid.com']
+let g:terraform_fmt_on_save=1
 
 syntax enable
 "colorscheme gruvbox
@@ -89,19 +94,29 @@ syntax enable
 colorscheme onedark
 let g:onedark_termcolors=256
 
-
-
 let vim_markdown_preview_browser='Google Chrome'
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = 'maintained',
+  highlight = {
+    enable = true;
+  },
+  indent = {
+    enable = false;
+  },
+}
+EOF
 
 " highlight Normal ctermfg=white ctermbg=darkblue
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=python3complete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=python3complete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
 " Omni complete- Ctrl-a for menu
 inoremap <C-a> <C-x><C-o>
@@ -125,5 +140,10 @@ noremap <Leader>q :call TrimWhitespace()<CR>
 
 
 :inoremap <F5> <C-R>=strftime("%c")<CR>
+
+
+" Rooter config -- Find the root of a project
+let g:rooter_patterns = ['.git/']
+
 
 
